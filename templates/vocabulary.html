@@ -1,0 +1,40 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Vocabulary
+{% endblock %}
+
+{% block page-lead %}
+List of studied words.
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 py-5" id="vocabulary">
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="py-3">#</th>
+              <th scope="col" class="py-3">Word</th>
+              <th scope="col" class="py-3">In Rassian</th>
+              <th scope="col" class="py-3">Definition</th>
+              <th scope="col" class="py-3">Example</th>
+              <th scope="col" class="py-3">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cnt, word, ru_translate, definition, example, comment in voc_items %}
+            <tr>
+                <td class="py-3">{{ cnt }}</td>
+                <td class="py-3">{{ word }}</td>
+                <td class="py-3">{{ ru_translate }}</td>
+                <td class="py-3">{{ definition }}</td>
+                <td class="py-3">{{ example }}</td>
+                <td class="py-3">{{ comment }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+</div>
+{% endblock %}
