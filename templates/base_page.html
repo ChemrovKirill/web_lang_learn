@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="eng">
 <head>
     <meta charset="UTF-8">
     <title>{% block pagetitle %}{% endblock %}</title>
@@ -13,9 +13,9 @@
     <div class="container">
         <header class="border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <div class="fs-2 mb-3">
-                    <img src="{% static 'globe.svg' %}" alt="Проект про математику" width="32" height="32"/>
-                    <span>Проект про математику</span>
+                <div class="fs-1 mb-3">
+                    <img src="{% static 'globe.svg' %}" alt="Learn English" width="48" height="48"/>
+                    <span style="font-size:xx-large">Learn English</span>
                 </div>
             </a>
         </header>
@@ -26,7 +26,7 @@
             </div>
         </div>
         {% block content %}{% endblock %}
-        <footer class="footer pt-3 mt-4 text-muted border-top">© 2023</footer>
+        <footer class="footer pt-3 mt-4 text-muted border-top">© Web-application project by Chemrov Kirill, Digital Department MIPT 2023</footer>
     </div>
 </main>
 </body>
