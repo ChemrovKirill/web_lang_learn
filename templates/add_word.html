@@ -1,0 +1,53 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Add a new word
+{% endblock %}
+
+{% block page-lead %}
+Here You can add a new word to the vocabulary. 
+{% endblock %}
+
+
+{% block content %}
+<div class="container-sm px-5 py-5" id="term-form">
+    <form method="post">
+        <div class="row px-5 py-2">
+            <h3>Mandatory fields</h3>
+        </div>
+        <div class="row px-5 py-2">
+            <div class="col-md-3">
+                <label for="word">New word</label>
+                <input type="text" class="form-control input-lg" name="word" id="word" placeholder="word" value required>
+            </div>
+            <div class="col-md-3">
+                <label for="ru_translate">Translation into Russian</label>
+                <input type="text" class="form-control input-lg" name="ru_translate" id="ru_translate" placeholder="слово" value required>
+            </div>
+            <div class="col-md-6">
+                <label for="definition">Definition</label>
+                <textarea type="text" class="form-control input-lg" name="definition" id="definition" aria-describedby="definition_note" rows="3"></textarea>
+                <div id="definition_note" class="form-text">define the word in english </div>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <h3>Optional fields</h3>
+        </div>
+        <div class="row px-5 py-2">
+            <div class="col-md-6">
+                <label for="new_definition">Example</label>
+                <textarea type="text" class="form-control input-lg" name="example" id="example" aria-describedby="example_note" rows="3"></textarea>
+                <div id="example_note" class="form-text">Enter any example of using the word</div>
+            </div>
+            <div class="col-md-6">
+                <label for="new_definition">Comment</label>
+                <textarea type="text" class="form-control input-lg" name="comment" id="comment" aria-describedby="comment_note" rows="3"></textarea>
+                <div id="comment_note" class="form-text">Leave any comments if you need</div>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <button type="submit" class="btn btn-primary" formaction="/add_word_post">Add the word</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

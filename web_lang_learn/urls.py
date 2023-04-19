@@ -20,5 +20,7 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('vocabulary', views.vocabulary),
+    path('add_word', views.add_word),
+    path('add_word_post', views.add_word_post),
     #path('admin/', admin.site.urls),
 ]

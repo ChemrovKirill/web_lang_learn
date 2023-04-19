@@ -11,3 +11,11 @@ def get_items_for_table():
                       item.comment if item.comment else '',
                       ])
     return items
+
+def add_word(item):
+    voc_item = Vocabulary(word=item.word, 
+                          ru_translate=item.ru_translate, 
+                          definition=item.definition, 
+                          example=item.example, 
+                          comment=item.comment)
+    voc_item.save()
