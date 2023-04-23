@@ -1,0 +1,51 @@
+<script>
+  function show(shown, hidden) {
+    document.getElementById(shown+'-text').style.display='block';
+    document.getElementById(shown+'-subtext').style.display='block';
+    document.getElementById(shown+'-turn').style.display='block';
+    document.getElementById(hidden+'-text').style.display='none';
+    document.getElementById(hidden+'-subtext').style.display='none';
+    document.getElementById(hidden+'-turn').style.display='none';
+    return false;
+  }
+</script>
+
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Cards
+{% endblock %}
+
+{% block page-lead %}
+Give the definition and translation of the word and test yourself by turning over the card.
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-6">
+    <div class="card shadow-sm">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: word" preserveAspectRatio="xMidYMid slice" focusable="false" text-anchor="middle" >
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#55595c"></rect>
+        <text x="50%" y="50%" fill="#eceeef" dy="0.3em" id="front-text" style="display:block" font-size="xxx-large">{{ front_text }}</text>
+        <text x="50%" y="50%" fill="#eceeef" dy="0.3em" id="back-text" style="display:none" font-size="xxx-large">{{ back_text }}</text>
+      </svg>
+      <div class="card-body">
+        <p class="card-text" id="front-subtext" style="display:block"> {{ front_subtext }} </p>
+        <p class="card-text" id="back-subtext" style="display:none"> {{ back_subtext }} </p>
+        <div class="row justify-content-center align-items-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Previous card</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="front-turn" style="display:block" onclick="return show('back','front');">Turn over this card</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="back-turn" style="display:none" onclick="return show('front','back');">Turn over this card</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Next card</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <small class="text-muted">{{ current_card }}/{{ num_cards }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

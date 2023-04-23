@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.index),
     path('vocabulary', views.vocabulary),
     path('add_word', views.add_word),
+    path('cards', views.create_cards),
     path('add_word_post', views.add_word_post),
     #path('admin/', admin.site.urls),
 ]
