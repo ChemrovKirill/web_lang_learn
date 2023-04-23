@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.cache import cache
-from . import vocabulary_db
+from . import vocabulary_db, cards_db
 
 def index(request):
     return render(request, "index.html")
@@ -42,3 +42,17 @@ def add_word_post(request):
     else:
         add_word(request)
 
+def create_cards(request):
+    context = {}
+    items_for_cards = vocabulary_db.get_rnd_cards(10)
+    cards_db.set_cards(items_for_cards)
+    cur_card = cards_db.get(1)
+    context = {"num_cards":len(items_for_cards),
+               "current_card":1,
+               "current_side":"front",
+               "front_text":cur_card.word,
+               "front_subtext":"",
+               "back_text":cur_card.ru_translate,
+               "back_subtext":cur_card.definition,
+              }
+    return render(request, "cards.html", context)

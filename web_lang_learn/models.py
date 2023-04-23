@@ -8,10 +8,21 @@
 from django.db import models
 
 
+class Cards(models.Model):
+    word = models.TextField()
+    ru_translate = models.TextField()
+    definition = models.TextField()
+    number = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'cards'
+
+
 class Vocabulary(models.Model):
     word = models.TextField()
-    ru_translate = models.TextField(blank=True, null=True)
-    definition = models.TextField(blank=True, null=True)
+    ru_translate = models.TextField()
+    definition = models.TextField()
     example = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
 
