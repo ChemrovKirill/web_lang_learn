@@ -12,31 +12,33 @@ def vocabulary(request):
 def add_word(request):
     return render(request, "add_word.html")
 
-def add_word_post(voc_item):
+def add_word_post(request):
     if request.method == "POST":
         cache.clear()
-        item.word = request.POST.get("word")
-        item.ru_translate = request.POST.get("ru_translate")
-        item.definition = request.POST.get("definition")
-        item.example = request.POST.get("example", "")
-        item.comment = request.POST.get("comment", "")
-        context = {"user": user_name}
-        if len(item.word) == 0:
+        item = {"word":request.POST.get("word"),
+                "ru_translate":request.POST.get("ru_translate"),
+                "definition":request.POST.get("definition"),
+                "example":request.POST.get("example", ""),
+                "comment":request.POST.get("comment", ""),
+                }
+        context = {}
+        if len(item["word"]) == 0:
             context["success"] = False
-            context["comment"] = "You didn't enter a word"
-        elif len(item.ru_translate) == 0:
+            context["comment"] = "You didn't enter a word."
+        elif len(item["ru_translate"]) == 0:
             context["success"] = False
-            context["comment"] = "You didn't enter a translation"
-        elif len(item.definition) == 0:
+            context["comment"] = "You didn't enter a translation."
+        elif len(item["definition"]) == 0:
             context["success"] = False
-            context["comment"] = "You didn't enter a definition"
+            context["comment"] = "You didn't enter a definition."
+        elif vocabulary_db.in_db(item["word"]):
+            context["success"] = False
+            context["comment"] = f"The word \'{item['word']}\' is already in the vocabulary."
         else:
             context["success"] = True
-            context["comment"] = "The word has been added"
+            context["comment"] = "The word has been added."
             vocabulary_db.add_word(item)
-        if context["success"]:
-            context["success-title"] = ""
-        return render(request, "add_word_request.html", context)
+        return render(request, "add_word_post.html", context)
     else:
         add_word(request)
 

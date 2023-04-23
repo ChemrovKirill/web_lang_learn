@@ -13,9 +13,16 @@ def get_items_for_table():
     return items
 
 def add_word(item):
-    voc_item = Vocabulary(word=item.word, 
-                          ru_translate=item.ru_translate, 
-                          definition=item.definition, 
-                          example=item.example, 
-                          comment=item.comment)
+    voc_item = Vocabulary(word=item["word"], 
+                          ru_translate=item["ru_translate"], 
+                          definition=item["definition"], 
+                          example=item["example"],
+                          comment=item["comment"]
+                         )
     voc_item.save()
+
+def in_db(word):
+    if Vocabulary.objects.filter(word=word) is None:
+        return False
+    else:
+        return True

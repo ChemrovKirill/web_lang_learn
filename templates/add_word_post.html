@@ -1,0 +1,24 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+{% if success %}
+Success!
+{% else %}
+Error!
+{% endif %}
+{% endblock %}
+
+{% block page-lead %}
+{{ comment }}
+{% endblock %}
+
+{% block content %}
+<div class="container-sm px-5 py-5" id="term-form-result">
+
+    <h2 class="pb-2 border-bottom">What's next?</h2>
+    <ul>
+        <li>Return to the <a href="/add_word">word adding page</a></li>
+        <li>Return to the <a href="/">homepage</a></li>
+    </ul>
+</div>
+{% endblock %}
