@@ -42,18 +42,28 @@ def add_word_post(request):
     else:
         add_word(request)
 
-def create_cards(request):
-    #if request.method == "GET":
-    cache.clear()
-    num_cards = 10
-    current_card = request.GET.get("current_card")
-    if current_card is None:
+def cards(request):
+    if request.method == "POST":
+        cache.clear()
+        num_cards = int(request.POST.get("num_cards"))
+        # TODO vvv
+        mode = request.POST.get("mode")
+        is_example = request.POST.get("is_example")
+        is_definition = request.POST.get("is_definition")
+        print(mode, is_example, is_definition)
         items_for_cards = vocabulary_db.get_rnd_cards(num_cards)
         cards_db.set_cards(items_for_cards)
         current_card = 1
+    elif request.method == "GET":
+        cache.clear()
+        current_card = request.GET.get("current_card")
+        if current_card is None:
+            return create_cards(request)
+        num_cards = cards_db.get_number()
+    else:
+        return create_cards(request)
     current_card = (int(current_card) - 1) % num_cards + 1
     cur_item = cards_db.get(current_card)
-    num_cards = cards_db.get_number()
     prev_card = current_card - 1 if current_card > 1 else None
     next_card = current_card + 1 if current_card < num_cards  else None
     context = { "num_cards":num_cards,
@@ -66,3 +76,6 @@ def create_cards(request):
                 "back_subtext":cur_item.definition,
                 }
     return render(request, "cards.html", context)
+
+def create_cards(request):
+    return render(request, "create_cards.html")

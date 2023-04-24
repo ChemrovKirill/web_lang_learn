@@ -1,0 +1,55 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Сards сreating 
+{% endblock %}
+
+{% block page-lead %}
+Select options to create a set of word learning cards.
+{% endblock %}
+
+
+{% block content %}
+<div class="container-sm px-5 py-1" id="add_word">
+    <form method="post">
+        <div class="row g-4 py-3 row-cols-1 row-cols-lg-2">
+            <div class="col-md-6">
+                <div class="row px-5 py-2">
+                    <h3>Main options</h3>
+                </div>
+                <div class="row px-5">
+                    <div class="col-md-8">
+                        <label for="word">Mode of the cards</label>
+                        <select class="form-select" id="mode" name="mode" value required>
+                            <option value="ru2en">From Russian into English</option>
+                            <option value="en2ru">From English into Russian</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="num_cards">Number of cards</label>
+                        <input type="number" class="form-control input-lg" name="num_cards" id="num_cards" placeholder="10" value required min="1" max="100">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row px-5 py-2">
+                    <h3>Additional options</h3>
+                </div>
+                <div class="row px-5">
+                    <div class="form-check">
+                        <input type="checkbox" name="is_example" class="form-check-input" id="is_example" value>
+                        <label class="form-check-label" for="is_example">Add examples of words usage on the cards</label>
+                    </div>
+                    <div class="form-check py-2">
+                        <input type="checkbox" name="is_definition" class="form-check-input" id="is_definition" value>
+                        <label class="form-check-label" for="is_definition">Add definitions of the words on the cards</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <button type="submit" class="btn btn-primary" formaction="/cards">Create a set of cards</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
