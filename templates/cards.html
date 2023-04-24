@@ -35,10 +35,18 @@ Give the definition and translation of the word and test yourself by turning ove
         <p class="card-text" id="back-subtext" style="display:none"> {{ back_subtext }} </p>
         <div class="row justify-content-center align-items-center">
           <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Previous card</button>
+            {% if prev_card %}
+            <a href="/cards?current_card={{prev_card}}" type="submit" class="btn btn-sm btn-outline-secondary">Previous card</a>
+            {% else %}
+            <button type="button" disabled="true" class="btn btn-sm btn-outline-secondary">Previous card</a>
+            {% endif %}
             <button type="button" class="btn btn-sm btn-outline-secondary" id="front-turn" style="display:block" onclick="return show('back','front');">Turn over this card</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" id="back-turn" style="display:none" onclick="return show('front','back');">Turn over this card</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Next card</button>
+            {% if next_card %}
+            <a href="/cards?current_card={{next_card}}" type="submit" class="btn btn-sm btn-outline-secondary">Next card</a>
+            {% else %}
+            <button type="button" disabled="true" class="btn btn-sm btn-outline-secondary">Next card</a>
+            {% endif %}
           </div>
         </div>
         <div class="d-flex justify-content-center align-items-center">

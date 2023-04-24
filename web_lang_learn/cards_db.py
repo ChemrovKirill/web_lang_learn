@@ -12,3 +12,6 @@ def set_cards(items):
 
 def get(n):
     return Cards.objects.get(number=n)
+
+def get_number():
+    return Cards.objects.all().count()

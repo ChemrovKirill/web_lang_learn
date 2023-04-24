@@ -43,16 +43,26 @@ def add_word_post(request):
         add_word(request)
 
 def create_cards(request):
-    context = {}
-    items_for_cards = vocabulary_db.get_rnd_cards(10)
-    cards_db.set_cards(items_for_cards)
-    cur_card = cards_db.get(1)
-    context = {"num_cards":len(items_for_cards),
-               "current_card":1,
-               "current_side":"front",
-               "front_text":cur_card.word,
-               "front_subtext":"",
-               "back_text":cur_card.ru_translate,
-               "back_subtext":cur_card.definition,
-              }
+    #if request.method == "GET":
+    cache.clear()
+    num_cards = 10
+    current_card = request.GET.get("current_card")
+    if current_card is None:
+        items_for_cards = vocabulary_db.get_rnd_cards(num_cards)
+        cards_db.set_cards(items_for_cards)
+        current_card = 1
+    current_card = (int(current_card) - 1) % num_cards + 1
+    cur_item = cards_db.get(current_card)
+    num_cards = cards_db.get_number()
+    prev_card = current_card - 1 if current_card > 1 else None
+    next_card = current_card + 1 if current_card < num_cards  else None
+    context = { "num_cards":num_cards,
+                "prev_card":prev_card ,
+                "current_card":current_card,
+                "next_card":next_card,
+                "front_text":cur_item.word,
+                "front_subtext":"",
+                "back_text":cur_item.ru_translate,
+                "back_subtext":cur_item.definition,
+                }
     return render(request, "cards.html", context)
