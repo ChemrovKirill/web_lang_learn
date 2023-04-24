@@ -13,30 +13,20 @@ This is the main page of the language learning website.
     <h2 class="pb-2 border-bottom">What would You like to do?</h2>
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-2">
         <div class="col d-flex">
-            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#cpu-fill"></use>
-                </svg>
-            </div>
             <div class="fs-1 mb-3">
-                <img src="{% static 'globe.svg' %}" alt="Learn English" width="48" height="48"/>
+                <img src="{% static 'vocabulary.svg' %}" width="64" height="64"/>
             </div>
-            <div>
+            <div class="px-3">
                 <h3 class="fs-1">Vocabulary</h3>
                 <p>View and edit the list of words you are learning.</p>
                 <a href="/vocabulary" class="btn btn-primary">Let's go!</a>
             </div>
         </div>
         <div class="col d-flex">
-            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#cpu-fill"></use>
-                </svg>
-            </div>
             <div class="fs-1 mb-3">
-                <img src="{% static 'globe.svg' %}" alt="Learn English" width="48" height="48"/>
+                <img src="{% static 'cards.svg' %}" width="64" height="64"/>
             </div>
-            <div>
+            <div class="px-3">
                 <h3 class="fs-1">Cards</h3>
                 <p>Learn and test yourself with word cards.</p>
                 <a href="/cards" class="btn btn-primary">
