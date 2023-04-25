@@ -9,10 +9,11 @@ from django.db import models
 
 
 class Cards(models.Model):
-    word = models.TextField()
-    ru_translate = models.TextField()
-    definition = models.TextField()
     number = models.IntegerField()
+    front_text = models.TextField()
+    back_text = models.TextField()
+    front_subtext = models.TextField()
+    back_subtext = models.TextField()
 
     class Meta:
         managed = False

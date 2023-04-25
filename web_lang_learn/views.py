@@ -42,17 +42,38 @@ def add_word_post(request):
     else:
         add_word(request)
 
+def create_cards(request):
+    return render(request, "create_cards.html")
+
 def cards(request):
     if request.method == "POST":
         cache.clear()
         num_cards = int(request.POST.get("num_cards"))
-        # TODO vvv
         mode = request.POST.get("mode")
         is_example = request.POST.get("is_example")
         is_definition = request.POST.get("is_definition")
-        print(mode, is_example, is_definition)
-        items_for_cards = vocabulary_db.get_rnd_cards(num_cards)
-        cards_db.set_cards(items_for_cards)
+        items_for_cards = vocabulary_db.get_rnd_items(num_cards)
+        card_items = []
+        for i4c in items_for_cards:
+            card = {"front_subtext":"", "back_subtext":""}
+            if mode == "ru2en":
+                card["front_text"] = i4c.ru_translate
+                if is_definition is not None:
+                    card["front_subtext"] = i4c.definition
+                card["back_text"] = i4c.word
+                if is_example is not None:
+                    card["back_subtext"] = i4c.example
+            elif mode == "en2ru":
+                card["front_text"] = i4c.word
+                if is_definition is not None:
+                    card["front_subtext"] = i4c.example
+                card["back_text"] = i4c.ru_translate
+                if is_example is not None:
+                    card["back_subtext"] = i4c.definition 
+            else:
+                raise ValueError('Unsupported cards mode')
+            card_items.append(card)
+        cards_db.set_cards(card_items)
         current_card = 1
     elif request.method == "GET":
         cache.clear()
@@ -70,12 +91,9 @@ def cards(request):
                 "prev_card":prev_card ,
                 "current_card":current_card,
                 "next_card":next_card,
-                "front_text":cur_item.word,
-                "front_subtext":"",
-                "back_text":cur_item.ru_translate,
-                "back_subtext":cur_item.definition,
+                "front_text":cur_item.front_text,
+                "front_subtext":cur_item.front_subtext,
+                "back_text":cur_item.back_text,
+                "back_subtext":cur_item.back_subtext,
                 }
     return render(request, "cards.html", context)
-
-def create_cards(request):
-    return render(request, "create_cards.html")

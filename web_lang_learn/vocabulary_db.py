@@ -29,12 +29,5 @@ def in_db(word):
     else:
         return True
 
-def get_rnd_cards(k):
-    voc_items = random.choices(Vocabulary.objects.all(), k=k)
-    card_items = []
-    for item in voc_items:
-        card_items.append({"word":item.word, 
-                           "ru_translate":item.ru_translate,
-                           "definition":item.definition
-                           })
-    return card_items
+def get_rnd_items(k):
+    return random.choices(Vocabulary.objects.all(), k=k)
