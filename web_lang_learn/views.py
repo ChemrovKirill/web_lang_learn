@@ -3,7 +3,12 @@ from django.core.cache import cache
 from . import vocabulary_db, cards_db
 
 def index(request):
-    return render(request, "index.html")
+    voc_items = vocabulary_db.get_rnd_items(3)
+    context = {}
+    for i, item in enumerate(voc_items):
+        context[f"word_{i+1}"] = voc_items[i].word
+        context[f"definition_{i+1}"] = voc_items[i].definition
+    return render(request, "index.html", context)
 
 def vocabulary(request):
     voc_items = vocabulary_db.get_items_for_table()
