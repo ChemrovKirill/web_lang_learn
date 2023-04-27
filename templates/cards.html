@@ -17,15 +17,15 @@ Cards
 {% endblock %}
 
 {% block page-lead %}
-Give the definition and translation of the word and test yourself by turning over the card.
+Translate the word and test yourself by turning over the card.
 {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-6">
     <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: word" preserveAspectRatio="xMidYMid slice" focusable="false" text-anchor="middle" >
-        <title>Placeholder</title>
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: word" preserveAspectRatio="xMidYMid slice" focusable="false" text-anchor="middle" >
+        <title>Card#{{ current_card }}</title>
         <rect width="100%" height="100%" fill="#55595c"></rect>
         <text x="50%" y="50%" fill="#eceeef" dy="0.3em" id="front-text" style="display:block" font-size="xxx-large">{{ front_text }}</text>
         <text x="50%" y="50%" fill="#eceeef" dy="0.3em" id="back-text" style="display:none" font-size="xxx-large">{{ back_text }}</text>

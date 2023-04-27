@@ -5,7 +5,7 @@ Vocabulary
 {% endblock %}
 
 {% block page-lead %}
-List of studied words.
+List of studied words with translation, definition, and examples.
 {% endblock %}
 
 {% block content %}
@@ -31,7 +31,7 @@ List of studied words.
             {% for cnt, word, ru_translate, definition, example, comment in voc_items %}
             <tr>
                 <td class="py-3">{{ cnt }}</td>
-                <td class="py-3">{{ word }}</td>
+                <td class="py-3"><b>{{ word }}</b> </td>
                 <td class="py-3">{{ ru_translate }}</td>
                 <td class="py-3">{{ definition }}</td>
                 <td class="py-3">{{ example }}</td>
